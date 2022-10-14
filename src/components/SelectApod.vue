@@ -8,7 +8,7 @@
 
                 </div>
                 <div>
-                    <label for="apodEnd">Select the end date: </label>
+                    <label for="apodEnd">Select the end date:</label>
                     <input  type="date" id="apodEnd" name="apodEnd" v-model="end" />
                 </div>
             </div>
