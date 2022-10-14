@@ -7,6 +7,7 @@
   --mildblack: #333333;
   --primarly: #f3f3f3;
   --mildgrey: #c3c3c3;
+  --mildgrey100: #959595;
   --darkgrey: #656565;
   --white:  white;
 
@@ -97,6 +98,11 @@ button {
   font-weight: 300;
   cursor: pointer;
   color: var(--black);
+  transition: all 500ms ease-in;
+}
+.sidebar .list:hover {
+  background-color: var(--mildgrey);
+
 }
 
 
@@ -115,4 +121,28 @@ button {
   color: var(--primarly);
   font-size: 2vw;
   margin-bottom: 2vw;
+}
+
+/* form */
+.from-container {
+  margin-left: 34vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  width: max-content;
+}
+.from-container > .labelInput  {
+  display: flex;
+  gap: 4vw;
+}
+
+.from-container > .labelInput label {
+  color: var(--darkgrey);
+  margin-right: .5vw;
+
+}
+
+.cta {
+  margin-left: 20vw;
+  margin-top: 2vw;
 }

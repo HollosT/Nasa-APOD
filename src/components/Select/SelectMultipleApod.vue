@@ -12,7 +12,8 @@
                     <input  type="date" id="apodEnd" name="apodEnd" v-model="end" />
                 </div>
             </div>
-            <p v-if="error" class="error"> {{error}}</p>
+          
+            <p v-if="error"  class="error"> {{error}}</p>
             <div>
                 <button v-if="start && end" class="cta">Get my APODs</button>
             </div>
@@ -21,7 +22,7 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import RangeOfApod from './RangeOfApod.vue';
+
 
 
 
@@ -52,36 +53,16 @@ export default {
 
         }
 
+
         
 
-        return { getApods, start, end, RangeOfApod, error }
+        return { getApods, start, end, error }
     }
 
 }
 </script>
 
 <style scoped>
-.from-container {
-    margin-left: 34vw;
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
-    width: max-content;
-}
-.from-container > .labelInput  {
-    display: flex;
-    gap: 4vw;
-}
 
-.from-container > .labelInput label {
-    color: var(--darkgrey);
-    margin-right: .5vw;
-
-}
-
-.cta {
-    margin-left: 20vw;
-    margin-top: 2vw;
-}
 
 </style>

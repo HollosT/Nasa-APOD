@@ -6,7 +6,7 @@
 
 <script>
 import RangeOfApod from './RangeOfApod.vue';
-import getMonthApod from '../composables/getMonthApod.js'
+import getMonthApod from '../../composables/getMonthApod.js'
 export default {
     components: { RangeOfApod },
 

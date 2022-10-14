@@ -10,9 +10,10 @@
 
                 </div>
 
+                <button @click="toggleUrl" class="cta">See APOD in HD</button>
                 <button @click="toggleDesc" class="cta">Sea more</button>
             </div>
-            <img :src="curApod.url" :alt="curApod.title" class="apod-img">
+            <img :src="url" :key="imgKey" :alt="curApod.title" class="apod-img">
             
         </div>
         <div v-if="visibleDesc" class="description">
@@ -20,13 +21,16 @@
         
         </div>
         
-
     </section>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
-import getApod from '../composables/getApod.js'
+import getApod from '../../composables/getApod.js'
+import { onMounted} from 'vue'
+
+
+
 export default {
     props: ['date'],
    
@@ -34,12 +38,29 @@ export default {
     setup(props) {
         const curApod = ref(null);
         const visibleDesc = ref(false)
+        const url = ref(null);
+        const imgKey = ref(0)
 
-        const getData = async () => {
+        onMounted( async () => {
             const apod = await getApod(props.date);
             curApod.value = apod
-        }
-        getData()
+            url.value = apod.url
+        })
+
+
+       const toggleUrl = (e) => {
+            if(url.value === curApod.value.url) {
+                url.value =  curApod.value.hdurl
+                imgKey.value++
+                e.target.innerHTML = 'Set back into lower resolution'
+            } else if(url.value === curApod.value.hdurl) {
+                url.value = curApod.value.url
+                imgKey.value++
+                e.target.innerHTML = 'See APOD in HD'
+
+            }
+       }
+
 
         const toggleDesc = (e) => {
             visibleDesc.value = !visibleDesc.value
@@ -51,7 +72,9 @@ export default {
             }
         }
 
-    return{ curApod, visibleDesc, toggleDesc }
+       
+
+    return{ curApod, visibleDesc, toggleDesc, toggleUrl, imgKey, url }
     }
 
 }
@@ -76,6 +99,11 @@ export default {
     padding: 0vw 2vw;
 }
 
+.loading {
+  margin-top: 10vw;
+  margin-left: 59vw;
+
+}
 
 
 </style>

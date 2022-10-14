@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import SingleApod from '@/components/SingleApod.vue';
+import SingleApod from '@/components/SingleAPOD/SingleApod.vue';
 import { useRoute, useRouter } from 'vue-router';
 import BaseSidebar from '../UI/BaseSideBar.vue'
 export default {

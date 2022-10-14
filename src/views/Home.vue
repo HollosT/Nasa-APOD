@@ -10,8 +10,8 @@
 
 <script>
 
- import TodayApod from '../components/TodayApod.vue'
- import MonthApod from '../components/MonthApod.vue'
+ import TodayApod from '../components/SingleAPOD/TodayApod.vue'
+ import MonthApod from '../components/MultipleAPOD/MonthApod.vue'
  import { computed } from '@vue/runtime-core'
  import { ref } from '@vue/reactivity'
  import BaseSidebar from '../UI/BaseSideBar.vue'

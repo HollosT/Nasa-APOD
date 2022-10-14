@@ -11,9 +11,9 @@
 <script>
 
 import { ref } from '@vue/reactivity'
-import getRangeOfApod from '../composables/getRangeOfApod.js'
-import Card from './Card.vue'
-
+import getRangeOfApod from '../../composables/getRangeOfApod.js'
+import Card from '../Card.vue'
+import {onMounted} from 'vue'
 
 export default {
   components: {Card},
@@ -22,12 +22,11 @@ export default {
   setup(props) {
     const apodsArr = ref([])
     
-    const getApods = async () => {
+    onMounted(async () => {
       const apods = await getRangeOfApod(props.start, props.end)
       apodsArr.value = apods
-    }
-    
-    getApods()
+    })
+
 
   
       return { apodsArr };
