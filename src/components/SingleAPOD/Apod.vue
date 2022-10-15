@@ -1,9 +1,9 @@
 <template>
-  <SelectOneApod v-if="!isData" @selectedDate="dates" />
+  <SelectOneApod v-if="!isData" @selectedDate="dates"  />
 
-  <button v-else-if="isData" class="cta container-title" @click="newSearch">New APODs</button>
+  <button v-else-if="isData" class="cta container-title" @click="newSearch">New APOD</button>
 
-  <SingleApod v-if="isData" :date="date" />
+  <SingleApod v-if="isData" :date="date" class="select"/>
 
 </template>
 

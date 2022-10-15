@@ -3,7 +3,7 @@
 
     <button v-else-if="isData" class="cta container-title" @click="newSearch">New APODs</button>
 
-    <RangeOfApod v-if="isData" :start="start" :end="end" />
+    <RangeOfApod v-if="isData" :start="start" :end="end" class="select"  />
 </template>
 
 <script>

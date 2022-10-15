@@ -9,7 +9,7 @@
           
             <p v-if="error"  class="error"> {{error}}</p>
             <div>
-                <button v-if="date" class="cta">Get my APODs</button>
+                <button v-if="date" class="cta">Get my APOD</button>
             </div>
         </form>
 </template>

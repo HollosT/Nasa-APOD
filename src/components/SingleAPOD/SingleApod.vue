@@ -9,16 +9,20 @@
                     <p>{{curApod.copyright}}</p>
 
                 </div>
+                <div class="btn-container">
+                    <button @click="toggleDesc" class="cta">Read more</button>
+                    <button v-if="isImg" @click="toggleUrl" class="cta">APOD in HD</button>
 
-                <button @click="toggleUrl" class="cta">See APOD in HD</button>
-                <button @click="toggleDesc" class="cta">Sea more</button>
+                </div>
+                <div v-if="visibleDesc" class="description">
+                    <p>{{curApod.explanation}}</p>
+                
+                </div>
             </div>
-            <img :src="url" :key="imgKey" :alt="curApod.title" class="apod-img">
+
+            <img v-if="isImg"  :src="url" :key="imgKey" :alt="curApod.title" class="apod-img">
+            <iframe v-else :src="url" frameborder="0" width="950" height="350"></iframe>
             
-        </div>
-        <div v-if="visibleDesc" class="description">
-            <p>{{curApod.explanation}}</p>
-        
         </div>
         
     </section>
@@ -38,13 +42,24 @@ export default {
     setup(props) {
         const curApod = ref(null);
         const visibleDesc = ref(false)
+
+        const isImg = ref(true)
         const url = ref(null);
+
+
         const imgKey = ref(0)
 
         onMounted( async () => {
             const apod = await getApod(props.date);
             curApod.value = apod
             url.value = apod.url
+            console.log(curApod.value);
+            if(curApod.value.media_type === 'image'){
+                isImg.value = true
+            
+            } else if(curApod.value.media_type === 'video') {
+                isImg.value = false
+            }
         })
 
 
@@ -52,11 +67,11 @@ export default {
             if(url.value === curApod.value.url) {
                 url.value =  curApod.value.hdurl
                 imgKey.value++
-                e.target.innerHTML = 'Set back into lower resolution'
+                e.target.innerHTML = 'Lower resolution'
             } else if(url.value === curApod.value.hdurl) {
                 url.value = curApod.value.url
                 imgKey.value++
-                e.target.innerHTML = 'See APOD in HD'
+                e.target.innerHTML = 'APOD in HD'
 
             }
        }
@@ -65,16 +80,16 @@ export default {
         const toggleDesc = (e) => {
             visibleDesc.value = !visibleDesc.value
             if(visibleDesc.value)  {
-                e.target.innerHTML = 'See less'
+                e.target.innerHTML = 'Read less'
             } else {
-                e.target.innerHTML = 'See more'
+                e.target.innerHTML = 'Read more'
 
             }
         }
 
        
 
-    return{ curApod, visibleDesc, toggleDesc, toggleUrl, imgKey, url }
+    return{ curApod, visibleDesc, toggleDesc, toggleUrl, imgKey, url, isImg }
     }
 
 }
@@ -84,8 +99,9 @@ export default {
 .img-container {
     position: relative;
     padding: 2vw;
-    display: flex;
-    gap: 1vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3vw;
 }
 .img-container > img {
     width: 35vw;
@@ -95,8 +111,10 @@ export default {
 }
 
 .description {
+    padding: 1vw 0;
     color: var(--primarly);
-    padding: 0vw 2vw;
+    width: 30vw;
+    height: auto;
 }
 
 .loading {
@@ -104,6 +122,14 @@ export default {
   margin-left: 59vw;
 
 }
-
+.cta{
+    margin: auto;
+    width: 14vw;
+}
+.btn-container {
+    margin-top: 2vw;
+    display: flex;
+    justify-content: space-between;
+}
 
 </style>

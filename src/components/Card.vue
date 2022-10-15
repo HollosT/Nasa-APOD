@@ -3,19 +3,31 @@
       <article>
         <p>{{index + 1}}.</p>
             <h4>{{apod.title}}</h4>
-        <img :src="apod.url" :alt="apod.title">
+        <img v-if="isImg" :src="apod.url" :alt="apod.title">
+        <iframe v-else :src="apod.url" frameborder="0" width="160" height="100"></iframe>
       </article>
     </router-link>
 
 </template>
 
 <script>
+import { onMounted, ref } from '@vue/runtime-core';
 
 
 export default {
     props: ['apod', 'index'],
-    setup() {
-   
+    setup(props) {
+        const isImg = ref(true)
+
+        onMounted(() => {
+            if(props.apod.media_type === 'video') {
+                isImg.value = false
+            }
+
+        })
+
+        return{isImg}
+        
     }
 
 }
