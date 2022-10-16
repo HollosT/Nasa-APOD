@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>Nasa apod</h1>
+        <h1>Nasa New apod</h1>
         <nav>
            <!-- <router-link>Apod of the day</router-link> -->
         </nav>
